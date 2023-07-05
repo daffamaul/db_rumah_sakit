@@ -1,60 +1,94 @@
-# db_rumah_sakit
+# BASIS DATA ANTRIAN RUMAH SAKIT (KELOMPOK 4)
 
-### 1.MENJELASKAN KARDINALITAS ANTAR TABEL
-Kardinalitas antar tabel dalam basis data mengacu pada hubungan antara jumlah baris dalam satu tabel dengan jumlah baris dalam tabel lainnya dalam suatu relasi. Kardinalitas ini dapat dinyatakan dalam notasi 1:1, 1:N, N:1, atau N:M, yang masing-masing menggambarkan hubungan satu-satu, satu-banyak, banyak-satu, atau banyak-banyak antara dua tabel
+## Anggota Kelompok
 
-### 2.MENAMPILKAN HASIL DARI QUERY
-Untuk menampilkan hasil dari query, Anda perlu menentukan query yang ingin dieksekusi terlebih dahulu. Kemudian, Anda dapat menggunakan perangkat lunak basis data atau bahasa pemrograman seperti SQL untuk mengeksekusi query tersebut dan menampilkan hasilnya. Contoh query SQL sederhana untuk menampilkan semua data dari tabel "customers" adalah sebagai berikut:
-'''sql <SELECT * FROM customers;>'''
+- ABID LU'AY RAIHAN TAUFIK (ERD)
+- HADI PERMANA (DDL)
+- RAFI MAULANA FIRDAUS (CRUD)
+- MUHAMAD DAFFA MAULANA ARRASYID (SQL JOIN)
+- RIFA ANDIANI MEILAWATI YULIANTO (LAPORAN)
 
-Hasil query ini akan menampilkan semua data dari tabel "customers". Namun, query yang lebih kompleks dapat digunakan untuk menampilkan data yang lebih spesifik atau untuk melakukan operasi lain pada data.
+## PENJELASAN ERD
 
-### 3. MENJELASKAN QUERY UNTUK TABEL
-Query untuk tabel adalah perintah yang digunakan untuk mengakses data dari tabel dalam database. Salah satu contoh query untuk tabel adalah perintah SELECT, yang digunakan untuk menampilkan data dari suatu tabel 1,2,3
-. Perintah SELECT diikuti oleh nama kolom yang ingin ditampilkan dan nama tabel yang ingin diakses. Contoh perintah SELECT untuk menampilkan semua kolom dari tabel mahasiswa adalah sebagai berikut:
-'''sql<SELECT * FROM mahasiswa;>
+[ERD](/img/Antrian%20pasien%20klinik.jpg)
 
-### 4. MENJELASKAN QUERY UNTUK CRUD
-Query untuk CRUD (Create, Read, Update, Delete) adalah perintah yang digunakan untuk melakukan operasi dasar pada data dalam database. Perintah CREATE digunakan untuk membuat tabel baru, sedangkan perintah ALTER digunakan untuk mengubah struktur tabel yang sudah ada
-- Perintah SELECT digunakan untuk menampilkan data dari tabel, sedangkan perintah UPDATE digunakan untuk memperbarui data yang sudah ada
-- Perintah DELETE digunakan untuk menghapus data dari tabel
-- Contoh perintah CRUD untuk menambahkan data ke tabel mahasiswa adalah sebagai berikut:
+Pada kardinalitas antara tabel antrian (1) dan tabel loket (n) adalah one-to-many. Maksudnya, data pada id_pelayanan dapat dimiliki oleh beberapa dari data id_antrian atau satu pasien bisa memiliki layanan yang sama dengan pasien lainnya. Begitupun dengan kardinalitas tabel loket (n) dan tabel jenis pelayanan. Pada loket dapat memiliki beberapa layanan sesuai dengan kebutuhan pasien.
 
-'''SQL<INSERT INTO mahasiswa (nama, umur, alamat) VALUES ('John Doe', 20, 'Jl. Sudirman No. 123');>
+## PENJELASAN DDL
 
-Perintah di atas akan menambahkan data baru ke tabel mahasiswa dengan nama 'John Doe', umur 20, dan alamat 'Jl. Sudirman No. 123'.
-# 1. create (membuat tabel baru)
-'''sql<CREATE TABLE nama_tabel (kolom1 tipe_data1,kolom2 tipe_data2,...);>
+[table_antrian](/img/table_antrian.png)
 
-# 2. read(membaca data dari tabel)
-'''sql<SELECT kolom1, kolom2, ... FROM nama_tabel;>
+Pada tabel antrian, memiliki 6 kolom dan setiap kolom memiliki tipe data seperti `varchar`,`enum()` dan `int`. `varchar` digunakan untuk menerima data berupa kalimat, `enum()` digunakan untuk menerima data berdasarkan ketentuan (misal: `enum('P','L')`) selain itu data tidak dapat dimasukkan, `int` menerima data hanya berupa angka.
 
-# 3. update(mengubah data yang ada di dalam tabel)
-'''sql<UPDATE nama_tabel SET kolom1 = nilai1, kolom2 = nilai2, ... WHERE kondisi;>
+Penentuan `primary key` diberikan pada kolom `id` sebagai pembeda dari data-data lainnya (karakteristik).
 
-# 4.delete(menghapus data dari tabel)
-'''sql<DELETE FROM nama_tabel WHERE kondisi;>
+[table_jenis_pelayann](/img/table_jenis_pelayanan.png)
 
-- Untuk melakukan operasi CRUD pada tabel, kita dapat menggunakan perintah-perintah di atas dengan menggabungkannya dengan kondisi-kondisi tertentu. Kondisi-kondisi ini dapat digunakan untuk memfilter data yang akan diambil, diubah, atau dihapus
-- Selain itu, query juga dapat digunakan untuk melakukan operasi penggabungan (join) antara dua atau lebih tabel dalam database. Operasi penggabungan ini dapat dilakukan dengan menggunakan perintah JOIN
+Pada tabel ini, memiliki 7 kolom dan setiap kolom memiliki tipe data seperti `varchar`, `date` dan `time`. Karena `varchar` sudah dibahas, fokus kita hanya membahas tipe data `date` dan `time` yang digunakan untuk mennujukan waktu dan jam. Format untuk `date` adalah `YYYY-MM-DD` dan `time` adalah `00:00:00`.
 
-### 5. MENJELASKAN QUERY UNTUK JOINING
-joining adalah cara untuk menggabungkan data yang diambil dari tabel-tabel melalui sebuah kolom yang menghubungkan mereka. Terdapat beberapa jenis join yang ada pada SQL, antara lain:
+[table](/img/table_loket.png)
 
-- INNER JOIN: melakukan join hanya pada observasi dengan elemen kunci yang sama-sama ada pada kedua tabel.
-- LEFT JOIN: menggabungkan seluruh baris pada tabel kiri dan sebagian baris pada tabel kanan yang elemen kuncinya cocok dengan tabel kiri.
-- RIGHT JOIN: kebalikan dari LEFT JOIN.
-- FULL JOIN: menggabungkan seluruh observasi pada kedua tabel melalui kolom elemen kunci.
+Tabel ini bisa juga disebut **Lookup Table** yang artinya tabel tersebut dapat menampung data-data tersebut dari tabel yang berelasi. Tabel ini memiliki 3 kolom dan setiap kolom memiliki tipe data seperti `varchar` dan `timestamp`. Untuk `timestamp` dengan default `current_timestamp()` yang maksudnya adalah ketika data tersebut dimasukkan, maka secara otomatis data tersebut memiliki waktu dengan format `YYYY-MM-DD 00:00:00`.
 
-Berikut adalah contoh query untuk melakukan INNER JOIN pada tabel Barang dan Pesanan dengan menggabungkan seluruh kolom pada kedua tabel dan hanya menampilkan kolom id_barang, nama, varian, dan tgl_pesan
+Terdapat **MUL** pada kolom **Key** yang artinya kolom tersebut memiliki kunci asing atau disebut **Foreign Key** yang menjadi referensi data dari tabel yang saling berelasi.
 
-'''sql<SELECT Barang.id_barang, Barang.nama, Barang.varian, Pesanan.tgl_pesan FROM Barang INNER JOIN Pesanan ON Pesanan.id_barang = Barang.id_barang;>
+## PENJELASAN CRUD (Create, Read, Update, Delete)
 
-Selain itu, terdapat beberapa best practices yang dapat diterapkan saat menulis SQL JOIN, antara lain:
-- Menentukan tipe join yang tepat untuk menghasilkan data yang diinginkan.
-- Menentukan urutan tabel yang tepat untuk mengoptimalkan kinerja query.
-- Menggunakan alias tabel untuk mempersingkat penulisan query.
-- Menggunakan ON clause daripada WHERE clause untuk menentukan kriteria join.
-- Menghindari penggunaan SELECT * dan hanya memilih kolom yang diperlukan.
-- Menggunakan indeks pada kolom yang digunakan sebagai elemen kunci pada join.
-- Menggunakan subquery atau CTE untuk menghindari nested join yang berlebihan
+```sql
+INSERT INTO table_name (column1, ...) VALUES (data);
+```
+
+Diatas adalah Query untuk membuat data. Arti dari Query tersebut adalah masukkan data ke dalam sebuah tabel yang memiliki kolom dengan mengisikan kolom tersebut dengan data yang diberikan.
+
+```sql
+SELECT * FROM table_name;
+```
+
+Diatas adalah Query untuk membaca data. Arti dari Query tersebut adalah seleksi semua kolom dari sebuah tabel
+
+```sql
+UPDATE table_name SET column = value WHERE id = value;
+```
+
+Diatas adalah Query untuk mengubah data. Arti dari Query tersebut adalah ubah data dari sebuah tabel dengan berisikan data untuk kolom yang ditentukan yang mana kolom tersebut memiliki identitas dengan nilai tertentu.
+
+```sql
+DELETE FROM table_name WHERE id = value;
+```
+
+Diatas adalah Query untuk menghapus data. Arti dari Query tersebut adalah hapus data dari sebuah tabel yang mana kolom tersebut memiliki identitas dengan nilai tertentu.
+
+## PENJELASAN SQL JOIN
+
+```sql
+SELECT * FROM jenis_pelayanan INNER JOIN loket ON jenis_pelayanan.id =loket.id_pelayanan;
+```
+
+Query tersebut menghasilkan gabungan kedua tabel dari tabel jenis pelayanan dan loket dengan seluruh kolom.
+[join-1](/img/join-1.png)
+
+```sql
+SELECT * FROM antrian INNER JOIN loket ON antrian.id =loket.id_antrian;
+```
+
+Query tersebut menghasilkan gabungan kedua tabel dari tabel antrian dan loket dengan seluruh kolom.
+[join-2](/img/join-2.png)
+
+```sql
+SELECT
+jenis_pelayanan.nama_pelayanan,
+jenis_pelayanan.nama_dokter,
+jenis_pelayanan.tanggal,
+jenis_pelayanan.jam_buka,
+jenis_pelayanan.jam_tutup,
+loket.waktu_daftar,
+antrian.nama_pasien,
+antrian.jenis_kelamin,
+antrian.umur,
+antrian.riwayat_penyakit,
+antrian.nomor_antrian
+FROM ((jenis_pelayanan INNER JOIN loket ON jenis_pelayanan.id =loket.id_pelayanan) INNER JOIN antrian ON loket.id_antrian = antrian.id);
+```
+
+Query tersebut menghasilkan gabungan ketiga tabel dari tabel antrian, jenis pelayanan dan loket dengan kolom yang telah ditentukan untuk ditampilkan.
+[join-3](/img/join-3.png)

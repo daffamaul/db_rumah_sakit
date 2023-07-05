@@ -10,23 +10,23 @@
 
 ## PENJELASAN ERD
 
-[ERD](/img/Antrian%20pasien%20klinik.jpg)
+![ERD](/img/Antrian%20pasien%20klinik.jpg)
 
 Pada kardinalitas antara tabel antrian (1) dan tabel loket (n) adalah one-to-many. Maksudnya, data pada id_pelayanan dapat dimiliki oleh beberapa dari data id_antrian atau satu pasien bisa memiliki layanan yang sama dengan pasien lainnya. Begitupun dengan kardinalitas tabel loket (n) dan tabel jenis pelayanan. Pada loket dapat memiliki beberapa layanan sesuai dengan kebutuhan pasien.
 
 ## PENJELASAN DDL
 
-[table_antrian](/img/table_antrian.png)
+![table_antrian](/img/table_antrian.png)
 
 Pada tabel antrian, memiliki 6 kolom dan setiap kolom memiliki tipe data seperti `varchar`,`enum()` dan `int`. `varchar` digunakan untuk menerima data berupa kalimat, `enum()` digunakan untuk menerima data berdasarkan ketentuan (misal: `enum('P','L')`) selain itu data tidak dapat dimasukkan, `int` menerima data hanya berupa angka.
 
 Penentuan `primary key` diberikan pada kolom `id` sebagai pembeda dari data-data lainnya (karakteristik).
 
-[table_jenis_pelayann](/img/table_jenis_pelayanan.png)
+![table_jenis_pelayann](/img/table_jenis_pelayanan.png)
 
 Pada tabel ini, memiliki 7 kolom dan setiap kolom memiliki tipe data seperti `varchar`, `date` dan `time`. Karena `varchar` sudah dibahas, fokus kita hanya membahas tipe data `date` dan `time` yang digunakan untuk mennujukan waktu dan jam. Format untuk `date` adalah `YYYY-MM-DD` dan `time` adalah `00:00:00`.
 
-[table](/img/table_loket.png)
+![table](/img/table_loket.png)
 
 Tabel ini bisa juga disebut **Lookup Table** yang artinya tabel tersebut dapat menampung data-data tersebut dari tabel yang berelasi. Tabel ini memiliki 3 kolom dan setiap kolom memiliki tipe data seperti `varchar` dan `timestamp`. Untuk `timestamp` dengan default `current_timestamp()` yang maksudnya adalah ketika data tersebut dimasukkan, maka secara otomatis data tersebut memiliki waktu dengan format `YYYY-MM-DD 00:00:00`.
 
@@ -65,14 +65,16 @@ SELECT * FROM jenis_pelayanan INNER JOIN loket ON jenis_pelayanan.id =loket.id_p
 ```
 
 Query tersebut menghasilkan gabungan kedua tabel dari tabel jenis pelayanan dan loket dengan seluruh kolom.
-[join-1](/img/join-1.png)
+
+![join-1](/img/join-1.png)
 
 ```sql
 SELECT * FROM antrian INNER JOIN loket ON antrian.id =loket.id_antrian;
 ```
 
 Query tersebut menghasilkan gabungan kedua tabel dari tabel antrian dan loket dengan seluruh kolom.
-[join-2](/img/join-2.png)
+
+![join-2](/img/join-2.png)
 
 ```sql
 SELECT
@@ -91,4 +93,5 @@ FROM ((jenis_pelayanan INNER JOIN loket ON jenis_pelayanan.id =loket.id_pelayana
 ```
 
 Query tersebut menghasilkan gabungan ketiga tabel dari tabel antrian, jenis pelayanan dan loket dengan kolom yang telah ditentukan untuk ditampilkan.
-[join-3](/img/join-3.png)
+
+![join-3](/img/join-3.png)
